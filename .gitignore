@@ -1,0 +1,14 @@
+.idea
+target
+*.iml
+.project
+.settings
+.DS_Store
+.classpath
+.factorypath
+dump.rdb
+Test.java
+*.log
+node_modules/
+package-lock.json
+uploads/

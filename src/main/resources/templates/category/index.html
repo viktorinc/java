@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+
+<head>
+    <title>Галерея</title>
+    <div layout:fragment="styles">
+        <link th:href="@{'/lib/css/lightbox2/css/lightbox.min.css'}" rel="stylesheet"/>
+    </div>
+</head>
+<body style="background-color: rgb(68, 51, 68)">
+<div layout:fragment="content" style="margin-top: 50px;">
+
+    <div class="container">
+        <a class="btn btn-success" th:href="@{/category/create}">Категорію</a>
+        <div class="row" style="background-color: #FFFFFF">
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb" th:each="category : ${categories}">
+                <img class="img-responsive"
+                     th:src="'/files/' + ${category.getImage()}"
+                     alt="Golden Gate Bridge with San Francisco in distance">
+                <h4 th:text="${category.getName()}"></h4>
+                <a class="btn btn-danger" th:href="'/category/delete/' + ${category.getId()}">Видалити</a>
+            </div>
+         </div>
+<!--        <div class="row">-->
+<!--            <div class="col-lg-3 col-md-4 col-xs-6 thumb">-->
+<!--                <a class="thumbnail" href="https://i.pinimg.com/736x/7d/85/0f/7d850f98d7621e07181fbb796365188e.jpg"-->
+<!--                   data-lightbox="example-set" data-title="Click the right half of the image to move forward.">-->
+<!--                    <img class="img-responsive" src="https://i.pinimg.com/736x/7d/85/0f/7d850f98d7621e07181fbb796365188e.jpg"-->
+<!--                         alt="Golden Gate Bridge with San Francisco in distance">-->
+<!--                </a>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-xs-6 thumb">-->
+<!--                <a class="thumbnail" href="https://static.toiimg.com/photo/22935916.cms"-->
+<!--                   data-lightbox="example-set" data-title="Or press the right arrow on your keyboard.">-->
+<!--                    <img class="img-responsive" src="https://static.toiimg.com/photo/22935916.cms"-->
+<!--                         alt="Forest with mountains behind">-->
+<!--                </a>-->
+<!--            </div>-->
+
+<!--            <div class="col-lg-3 col-md-4 col-xs-6 thumb">-->
+<!--                <a class="thumbnail" href="https://i.pinimg.com/736x/59/07/45/5907450e702c8d715e3c597eb03701de.jpg"-->
+<!--                   data-lightbox="example-set" data-title="The next image in the set is preloaded as you're viewing.">-->
+<!--                    <img class="img-responsive" src="https://i.pinimg.com/736x/59/07/45/5907450e702c8d715e3c597eb03701de.jpg"-->
+<!--                         alt="Bicyclist looking out over hill at ocean">-->
+<!--                </a>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-xs-6 thumb">-->
+<!--                <a class="thumbnail" href="https://i.pinimg.com/736x/57/0f/97/570f97f5bab4da14e74576e68403517d.jpg"-->
+<!--                   data-lightbox="example-set"-->
+<!--                   data-title="Click anywhere outside the image or the X to the right to close.">-->
+<!--                    <img class="img-responsive" src="https://i.pinimg.com/736x/57/0f/97/570f97f5bab4da14e74576e68403517d.jpg"-->
+<!--                         alt="Small lighthouse at bottom with ocean behind">-->
+<!--                </a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <ul class="list-group col-lg-6">-->
+<!--            <li class="list-group-item list-group-item-warning">Вік - 26</li>-->
+<!--            <li class="list-group-item list-group-item-warning">Колір волосся - Чорний</li>-->
+
+<!--        </ul>-->
+<!--        <ul class="list-group col-lg-6">-->
+<!--            <li class="list-group-item list-group-item-warning">Імя - Анна</li>-->
+<!--            <li class="list-group-item list-group-item-warning">Фігура - 60х90х60</li>-->
+<!--        </ul>-->
+
+<!--    </div>-->
+<!--    <div class="container">-->
+
+<!--        <div class="row">-->
+<!--            <div class="col-lg-3 col-md-4 col-xs-6 thumb">-->
+<!--                <a class="thumbnail" href="https://i.pinimg.com/736x/ec/7b/b0/ec7bb0e0bd29aa4f5bd32c23fd3cb4da.jpg"-->
+<!--                   data-lightbox="example-set" data-title="Click the right half of the image to move forward.">-->
+<!--                    <img class="img-responsive" src="https://i.pinimg.com/736x/ec/7b/b0/ec7bb0e0bd29aa4f5bd32c23fd3cb4da.jpg"-->
+<!--                         alt="Golden Gate Bridge with San Francisco in distance">-->
+<!--                </a>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-xs-6 thumb">-->
+<!--                <a class="thumbnail" href="https://i.pinimg.com/736x/d9/74/6d/d9746dcc50de6b4f6297fa57397187a9.jpg"-->
+<!--                   data-lightbox="example-set" data-title="Or press the right arrow on your keyboard.">-->
+<!--                    <img class="img-responsive" src="https://i.pinimg.com/736x/d9/74/6d/d9746dcc50de6b4f6297fa57397187a9.jpg"-->
+<!--                         alt="Forest with mountains behind">-->
+<!--                </a>-->
+<!--            </div>-->
+
+<!--            <div class="col-lg-3 col-md-4 col-xs-6 thumb">-->
+<!--                <a class="thumbnail" href="https://i.pinimg.com/736x/c9/83/4b/c9834b628fd40220c0e60cc9344a7b96.jpg"-->
+<!--                   data-lightbox="example-set" data-title="The next image in the set is preloaded as you're viewing.">-->
+<!--                    <img class="img-responsive" src="https://i.pinimg.com/736x/c9/83/4b/c9834b628fd40220c0e60cc9344a7b96.jpg"-->
+<!--                         alt="Bicyclist looking out over hill at ocean">-->
+<!--                </a>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-xs-6 thumb">-->
+<!--                <a class="thumbnail" href="https://i.pinimg.com/736x/bc/1e/63/bc1e63dde09c8f4715f53dcfb935de5c.jpg"-->
+<!--                   data-lightbox="example-set"-->
+<!--                   data-title="Click anywhere outside the image or the X to the right to close.">-->
+<!--                    <img class="img-responsive" src="https://i.pinimg.com/736x/bc/1e/63/bc1e63dde09c8f4715f53dcfb935de5c.jpg"-->
+<!--                         alt="Small lighthouse at bottom with ocean behind">-->
+<!--                </a>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <ul class="list-group col-lg-6 bg-dark">-->
+<!--            <li class="list-group-item list-group-item-warning">Вік - 26</li>-->
+<!--            <li class="list-group-item list-group-item-warning">Колір волосся - Чорний</li>-->
+
+<!--        </ul>-->
+<!--        <ul class="list-group col-lg-6 bg-dark">-->
+<!--            <li class="list-group-item list-group-item-warning">Імя - Анна</li>-->
+<!--            <li class="list-group-item list-group-item-warning">Фігура - 60х90х60</li>-->
+<!--        </ul>-->
+
+
+<!--    </div>-->
+
+<!--    <div class="container">-->
+
+<!--        <div class="row">-->
+<!--            <div class="col-lg-3 col-md-4 col-xs-6 thumb">-->
+<!--                <a class="thumbnail" href="https://static.toiimg.com/photo/40683286.cms"-->
+<!--                   data-lightbox="example-set" data-title="Click the right half of the image to move forward.">-->
+<!--                    <img class="img-responsive" src="https://static.toiimg.com/photo/40683286.cms"-->
+<!--                         alt="Golden Gate Bridge with San Francisco in distance">-->
+<!--                </a>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-xs-6 thumb">-->
+<!--                <a class="thumbnail" href="https://i.pinimg.com/originals/1c/90/d5/1c90d581104b1e353a7d67c4781ed543.jpg"-->
+<!--                   data-lightbox="example-set" data-title="Or press the right arrow on your keyboard.">-->
+<!--                    <img class="img-responsive" src="https://i.pinimg.com/originals/1c/90/d5/1c90d581104b1e353a7d67c4781ed543.jpg"-->
+<!--                         alt="Forest with mountains behind">-->
+<!--                </a>-->
+<!--            </div>-->
+
+<!--            <div class="col-lg-3 col-md-4 col-xs-6 thumb">-->
+<!--                <a class="thumbnail" href="https://static.toiimg.com/photo/55998406.cms"-->
+<!--                   data-lightbox="example-set" data-title="The next image in the set is preloaded as you're viewing.">-->
+<!--                    <img class="img-responsive" src="https://static.toiimg.com/photo/55998406.cms"-->
+<!--                         alt="Bicyclist looking out over hill at ocean">-->
+<!--                </a>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-md-4 col-xs-6 thumb">-->
+<!--                <a class="thumbnail" href="https://i.pinimg.com/736x/de/91/57/de915747d15b6b9bb087b862337205cb.jpg"-->
+<!--                   data-lightbox="example-set"-->
+<!--                   data-title="Click anywhere outside the image or the X to the right to close.">-->
+<!--                    <img class="img-responsive" src="https://i.pinimg.com/736x/de/91/57/de915747d15b6b9bb087b862337205cb.jpg"-->
+<!--                         alt="Small lighthouse at bottom with ocean behind">-->
+<!--                </a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <ul class="list-group col-lg-6 bg-dark">-->
+<!--            <li class="list-group-item list-group-item-warning">Вік - 26</li>-->
+<!--            <li class="list-group-item list-group-item-warning">Колір волосся - Чорний</li>-->
+
+<!--        </ul>-->
+<!--        <ul class="list-group col-lg-6 bg-dark">-->
+<!--            <li class="list-group-item list-group-item-warning">Імя - Анна</li>-->
+<!--            <li class="list-group-item list-group-item-warning">Фігура - 60х90х60</li>-->
+<!--        </ul>-->
+
+    </div>
+
+
+
+</div>
+<div layout:fragment="scripts">
+    <script th:src="@{'/lib/css/lightbox2/js/lightbox.min.js'}"></script>
+    <script th:src="@{'/lib/css/lightbox2/js/lightbox-plus-jquery.min.js'}"></script>
+</div>
+
+</body>
+</html>

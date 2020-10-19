@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+
+<head>
+    <title>Галерея</title>
+    <div layout:fragment="styles">
+
+    </div>
+</head>
+<body>
+<div layout:fragment="content" style="margin-top: 50px;">
+
+    <div class="container" style="background-color: #FFFFFF">
+        <h1>Ви дійсно бажаєте видалити фото?</h1>
+        <form th:action="@{/gallery/delete}" method="post" id="form" class="form">
+            <input name="id" type="hidden" th:value="${gallery.getId()}"/>
+            <img class="img-responsive" width="450" th:src="'/files/' + ${gallery.getName()}" alt="Golden Gate Bridge with San Francisco in distance">
+            <button type="submit" class="btn btn-danger">Видалити</button>
+        </form>
+
+
+    </div>
+
+
+
+
+</div>
+<div layout:fragment="scripts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+
+<head>
+    <title>Статистика</title>
+    <div layout:fragment="styles">
+        <link th:href="@{'/lib/css/Chart.min.css'}" rel="stylesheet"/>
+    </div>
+</head>
+<body>
+<div layout:fragment="content" style="margin-top: 50px;">
+    <div class="container">
+        <h1>Статистика роботи працівників</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="line-chart" width="800" height="450"></canvas>
+            </div>
+            <div class="col-md-12">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div layout:fragment="scripts">
+    <script th:src="@{'/lib/js/Chart.min.js'}"></script>
+    <script>
+        new Chart(document.getElementById("line-chart"), {
+            type: 'line',
+            data: {
+                labels: ["20 серпня 2019р.","21 серпня 2019р.","22 серпня 2019р.","23 серпня 2019р.",
+                    "24 серпня 2019р.","25 серпня 2019р.","26 серпня 2019р."],
+                datasets: [{
+                    data: [100,120,320,50,0,0,500],
+                    label: "Оксана",
+                    pointRadius: 7,
+                    pointHoverRadius: 9,
+                    borderColor: "#3e95cd",
+                    fill: false
+                }, {
+                    data: [500,550,650,600,550,450,1010],
+                    label: "Сніжана",
+                    pointRadius: 7,
+                    pointHoverRadius: 9,
+                    borderColor: "#8e5ea2",
+                    fill: false
+                }
+                ],
+                backgroundColor: "rgba(52,152,219,0.4)"
+            },
+            options: {
+                onClick: function (element, dataAtClick) {
+                    console.log(element, dataAtClick);
+                    // let scaleRef,
+                    //     valueX,
+                    //     valueY;
+                    // for (var scaleKey in this.scales) {
+                    //     scaleRef = this.scales[scaleKey];
+                    //     if (scaleRef.isHorizontal() && scaleKey == 'x-axis-1') {
+                    //         valueX = scaleRef.getValueForPixel(element.offsetX);
+                    //     } else if (scaleKey == 'y-axis-1') {
+                    //         valueY = scaleRef.getValueForPixel(element.offsetY);
+                    //     }
+                    // }
+                    // this.data.datasets.forEach((dataset) => {
+                    //     dataset.data.push({
+                    //         x: valueX,
+                    //         y: valueY
+                    //     });
+                    // });
+                    // this.update();
+                },
+                title: {
+                    display: true,
+                    text: 'Дохід по датах'
+                },
+                elements: {
+                    point: {
+                        borderColor: "rgb(255,255,0)",
+                        //backgroundColor: "rgb(255,0,0)"
+                    }
+                },
+                tooltips:{
+                    showTooltips: false,
+                    callbacks: {
+                        label: function(item) {
+                            console.log("Показник", item.yLabel+" "+ item.xLabel);
+                            return `${item.yLabel} грн.`},
+                    },
+                    enabled: true,
+                    mode: 'label'
+                }
+            }
+        });
+
+
+
+    </script>
+
+    <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    fill: false,
+                    //borderWidth: 1
+                },
+
+                    {
+                        label: '# of Votes2',
+                        data: [24,38, 6, 10, 4, 6],
+                        fill: false,
+                        //borderWidth: 1
+                    },
+
+
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            },
+
+
+
+            onClick:function(e){
+                /*var activePoints = myChart.getElementsAtEvent(e);
+                var selectedIndex = activePoints[0]._index; */
+                /* alert(this.data.datasets[0].data[selectedIndex]);
+                console.log(this.data.datasets[0].data[selectedIndex]);
+                */
+            }
+        });
+
+        /* https://github.com/chartjs/Chart.js/issues/2292 */
+        document.getElementById("myChart").onclick = function (evt) {
+            var activePoints = myChart.getElementsAtEventForMode(evt, 'point', myChart.options);
+            var firstPoint = activePoints[0];
+            var label = myChart.data.labels[firstPoint._index];
+            var value = myChart.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
+            alert(label + ": " + value);
+        };
+
+    </script>
+</div>
+
+</body>
+</html>
